@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # collection_template
 You can build a new repository for an Ansible Collection using this template by following [Creating a repository from a template](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template). This README.md contains recommended headings for your collection README.md, with comments describing what each section should contain. Once you have created your collection repository, delete this paragraph and the title above it from your README.md.
 
@@ -65,4 +64,3 @@ See [LICENSE](https://www.gnu.org/licenses/gpl-3.0.txt) to see the full text.
 # Ansible Collection - zeusbaba.weblogic_deploy_tooling
 
 Documentation for the collection.
->>>>>>> 87a74b5 (baseline)
