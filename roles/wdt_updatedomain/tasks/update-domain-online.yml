@@ -1,0 +1,35 @@
+---
+
+- name: set_fact WDT_TEMPLATES
+  set_fact:
+    wdt_templates: "{{ wdt_templates }}"
+
+- name: template WDT related files
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ wdt_templates_home }}/{{ item }}"
+    owner: "{{ wdt_user }}"
+    group: "{{ wdt_group }}"
+    mode: u+rwx,g+rwx
+  loop: "{{ wdt_templates }}"
+
+- name: "updateDomain using WDT-online"
+  expect:
+    ansible.builtin.shell: "bash {{ wdt_home }}/bin/updateDomain.sh \
+      -oracle_home {{ mw_home }} \
+      -domain_type WLS \
+      -domain_home {{ domain_home }} \
+      -model_file {{ wdt_templates | join(',') }} \
+     -admin_user {{ weblogic_username }} \
+     -admin_url t3://{{ weblogic_admin_dnsname }}:{{ weblogic_admin_port }}"
+    responses:
+      'Please enter the WebLogic administrator password': "{{ weblogic_password }}"
+    timeout: 900
+  args:
+    chdir: "{{ wdt_templates_home }}"
+    executable: /bin/bash
+  environment:
+    JAVA_HOME: "{{ java_home }}"
+  ignore_errors: true
+  # NB! need to register & properly handle WDT responses!!! esp. "(exit code = 103)" which requires restart
+  # for now, we intentionally ignore errors

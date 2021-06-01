@@ -1,0 +1,14 @@
+---
+# defaults file for wdt_discoverdomain
+
+# NB! remember to override those variables inside your playbook!!!
+wdt_user: "wdt"
+wdt_group: "wdt"
+workdir: "/home/{{ wdt_user }}"
+java_home: "{{ workdir }}/mw/jdk1.8.0_281"
+mw_home: "{{ workdir }}/mw/Oracle_Home"
+domain_home: "{{ workdir }}/mw/domain/mywlsdomain"
+wdt_home: "{{ workdir }}/weblogic-deploy"
+wdt_templates_home: "{{ workdir }}/wdt-templates"
+wdt_archive_file: "WDT_template-discovered_offline.zip"
+wdt_template_file: "WDT_template-discovered_offline.yaml"

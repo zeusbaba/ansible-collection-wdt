@@ -1,0 +1,38 @@
+---
+## Create new domain using WDT
+
+- name: set_fact WDT_TEMPLATES
+  set_fact:
+    wdt_templates: "{{ wdt_templates }}"
+
+- name: template WDT related files
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ wdt_templates_home }}/{{ item }}"
+    owner: "{{ wdt_user }}"
+    group: "{{ wdt_group }}"
+    mode: u+rwx,g+rwx
+  loop: "{{ wdt_templates }}"
+
+- name: ensure directories and ownership
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ wdt_user }}"
+    group: "{{ wdt_group }}"
+    mode: u+rwx,g+rwx
+  loop:
+    - "{{ domain_root }}"
+
+- name: createDomain using WDT template
+  ansible.builtin.shell: "bash {{ wdt_home }}/bin/createDomain.sh \
+      -oracle_home {{ mw_home }} \
+      -domain_type {{ wdt_domain_type }} \
+      -domain_parent {{ domain_root }} \
+      -model_file {{ wdt_templates | join(',') }}"
+  args:
+    chdir: "{{ wdt_templates_home }}"
+    creates: createDomainResult.txt
+    executable: /bin/bash
+  environment:
+    JAVA_HOME: "{{ java_home }}"

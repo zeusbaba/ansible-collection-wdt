@@ -1,0 +1,16 @@
+---
+# defaults file for wdt_setup
+
+# yamllint disable-line
+# See https://github.com/oracle/weblogic-deploy-tooling/releases
+wdt_distribution_origin: "https://github.com/oracle/weblogic-deploy-tooling"
+wdt_distribution_version: "1.9.13"
+wdt_distribution: "{{ wdt_distribution_origin }}/releases/download/release-{{ wdt_distribution_version }}/weblogic-deploy.zip"
+# e.g. https://github.com/oracle/weblogic-deploy-tooling/releases/download/release-1.9.13/weblogic-deploy.zip
+
+# create a directory "weblogic-deploy" under this specified dir
+wdt_install_location: "/home/{{ wdt_user }}"
+wdt_home: "{{ wdt_install_location }}/weblogic-deploy"
+wdt_user: "wdt"
+wdt_group: "wdt"
+wdt_templates_home: "{{ wdt_user }}/wdt-templates"

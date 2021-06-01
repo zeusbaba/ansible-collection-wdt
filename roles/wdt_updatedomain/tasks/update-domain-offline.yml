@@ -1,0 +1,26 @@
+---
+
+- name: set_fact WDT_TEMPLATES
+  set_fact:
+    wdt_templates: "{{ wdt_templates }}"
+
+- name: template WDT related files
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ wdt_templates_home }}/{{ item }}"
+    owner: "{{ wdt_user }}"
+    group: "{{ wdt_group }}"
+    mode: u+rwx,g+rwx
+  loop: "{{ wdt_templates }}"
+
+- name: "updateDomain using WDT-offline"
+  ansible.builtin.shell: "bash {{ wdt_home }}/bin/updateDomain.sh \
+    -oracle_home {{ mw_home }} \
+    -domain_type {{ wdt_domain_type }} \
+    -domain_home {{ domain_home }} \
+    -model_file {{ wdt_templates | join(',') }}"
+  args:
+    chdir: "{{ wdt_templates_home }}"
+    executable: /bin/bash
+  environment:
+    JAVA_HOME: "{{ java_home }}"

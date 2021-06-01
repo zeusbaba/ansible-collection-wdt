@@ -1,0 +1,6 @@
+---
+# tasks file for wdt_updatedomain
+
+# run the chosen WDT action
+- name: run WDT action
+  import_tasks: "{{ run_wdt_action }}.yml"

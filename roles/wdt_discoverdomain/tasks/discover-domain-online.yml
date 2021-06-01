@@ -1,0 +1,22 @@
+---
+## DISCOVER existing domain using WDT-online
+
+- name: discoverDomain and create template via WDT-online
+  ansible.builtin.shell: "bash {{ wdt_home }}/bin/discoverDomain.sh \
+    -oracle_home $ORACLE_HOME \
+    -domain_home $DOMAIN_HOME \
+    -archive_file $WDT_ARCHIVE_FILE \
+    -model_file $WDT_TEMPLATE_FILE \
+    -admin_user $ADMIN_USER -admin_url $ADMIN_URL"
+  args:
+    chdir: "{{ wdt_templates_home }}"
+    executable: /bin/bash
+  environment:
+    JAVA_HOME: "{{ java_home }}"
+    ORACLE_HOME: "{{ oracle_home }}"
+    DOMAIN_HOME: "{{ domain_home }}"
+    WDT_ARCHIVE_FILE: "WDT_template-discovered_online.zip"
+    WDT_TEMPLATE_FILE: "WDT_template-discovered_online.yaml"
+    ADMIN_URL: "t3://wlsadmin.mydomain.com:7001"
+    ADMIN_USER: "weblogic"
+    ADMIN_PASSWORD: "weblogic"

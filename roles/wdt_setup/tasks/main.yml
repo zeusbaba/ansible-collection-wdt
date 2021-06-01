@@ -1,0 +1,58 @@
+---
+# tasks file for wdt_setup
+
+- name: ensure the folders exist
+  file:
+    path: "{{ wdt_install_location }}"
+    state: directory
+    owner: "{{ wdt_user }}"
+    group: "{{ wdt_group }}"
+    mode: u+rwx,g+rw
+
+# this is to avoid runtime classes piling up into conflict
+# see why https://github.com/oracle/weblogic-deploy-tooling/issues/842
+- name: make sure that the existing WDT binaries are deleted
+  file:
+    path: "{{ wdt_home }}"
+    state: absent
+
+- name: get archive from github
+  unarchive:
+    src: "{{ wdt_distribution }}"
+    dest: "{{ wdt_install_location }}"
+    remote_src: true
+    owner: "{{ wdt_user }}"
+    group: "{{ wdt_group }}"
+
+- name: update bash env for WDT_HOME
+  lineinfile:
+    dest: "{{ item }}"
+    regexp: '^export WDT_HOME=.*$'
+    line: 'export WDT_HOME={{ wdt_home }}'
+    state: present
+    create: true
+    insertafter: EOF
+  loop:
+    - "/home/{{ wdt_user }}/.bashrc"
+
+- name: ensure directories and ownership
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ wdt_user }}"
+    group: "{{ wdt_group }}"
+    mode: u+rw,g+rw
+  loop:
+    - "{{ wdt_templates_home }}" # for templates/files used by Weblogic Deploy Tooling (WDT)
+
+
+# NB! pexpect is required by WDT-online actions
+# FIXME: this must be run as root / sudo
+# - name: Ensure pip is present
+#  apt:
+#    name: python3-pip
+#    state: present
+#
+# - name: Install pexpect package
+#  pip:
+#    name: pexpect

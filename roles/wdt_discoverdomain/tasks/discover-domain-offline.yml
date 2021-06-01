@@ -1,0 +1,18 @@
+---
+## DISCOVER existing domain using WDT-offline
+
+- name: discoverDomain and create template via WDT-offline
+  ansible.builtin.shell: "bash {{ wdt_home }}/bin/discoverDomain.sh \
+    -oracle_home $ORACLE_HOME \
+    -domain_home $DOMAIN_HOME \
+    -archive_file $WDT_ARCHIVE_FILE \
+    -model_file $WDT_TEMPLATE_FILE"
+  args:
+    chdir: "{{ wdt_templates_home }}"
+    executable: /bin/bash
+  environment:
+    JAVA_HOME: "{{ java_home }}"
+    ORACLE_HOME: "{{ mw_home }}"
+    DOMAIN_HOME: "{{ domain_home }}"
+    WDT_ARCHIVE_FILE: "{{ wdt_archive_file }}"
+    WDT_TEMPLATE_FILE: "{{ wdt_template_file }}"

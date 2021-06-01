@@ -1,0 +1,15 @@
+---
+# defaults file for wdt_createdomain
+
+# NB! remember to override those variables inside your playbook!!!
+wdt_user: "wdt"
+wdt_group: "wdt"
+workdir: "/home/{{ wdt_user }}"
+java_home: "{{ workdir }}/mw/jdk1.8.0_281"
+mw_home: "{{ workdir }}/mw/Oracle_Home"
+domain_root: "{{ workdir }}/mw/domain"
+wdt_home: "{{ workdir }}/weblogic-deploy"
+wdt_templates_home: "{{ workdir }}/wdt-templates"
+
+# to create more complex domain type definitions, see https://oracle.github.io/weblogic-deploy-tooling/userguide/tools-config/domain_def/
+wdt_domain_type: "WLS"

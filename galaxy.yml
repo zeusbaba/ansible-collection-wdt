@@ -5,10 +5,10 @@
 namespace: zeusbaba
 
 # The name of the collection. Has the same character restrictions as 'namespace'
-name: weblogic_deploy_tooling
+name: wdt
 
 # The version of the collection. Must be compatible with semantic versioning
-version: 1.0.0
+version: 1.1.1
 
 # The path to the Markdown (.md) readme file. This path is relative to the root of the collection
 readme: README.md
@@ -16,17 +16,17 @@ readme: README.md
 # A list of the collection's content authors. Can be just the name or in the format 'Full Name <email> (url)
 # @nicks:irc/im.site#channel'
 authors:
-- your name (github.com/zeusbaba)
+- Yilmaz Guleryuz <yg@beerstorm.net> (github.com/zeusbaba)
 
 
 ### OPTIONAL but strongly recommended
 # A short summary description of the collection
-description: your collection description
+description: configure Oracle Middleware using Weblogic Deploy Tooling
 
 # Either a single license or a list of licenses for content inside of a collection. Ansible Galaxy currently only
 # accepts L(SPDX,https://spdx.org/licenses/) licenses. This key is mutually exclusive with 'license_file'
-license:
-- GPL-2.0-or-later
+#license:
+#- GPL-2.0-or-later
 
 # The path to the license file for the collection. This path is relative to the root of the collection. This key is
 # mutually exclusive with 'license'
@@ -37,8 +37,14 @@ license_file: LICENSE
 tags:
   # tags so people can search for collections https://galaxy.ansible.com/search
   # tags are all lower-case, no spaces, no dashes.
-  - example1
-  - example2
+  - wdt
+  - middleware
+  - oracle
+  - weblogic
+  - osb
+  - soa
+  - wls
+
 
 # Collections that this collection requires to be installed for it to be usable. The key of the dict is the
 # collection label 'namespace.name'. The value is a version range
@@ -46,10 +52,10 @@ tags:
 # range specifiers can be set and are separated by ','
 dependencies: {}
 
-repository: https://github.com/ansible-collections/community.REPO_NAME
-#documentation: https://github.com/ansible-collection-migration/community.REPO_NAME/tree/main/docs
-homepage: https://github.com/ansible-collections/community.REPO_NAME
-issues: https://github.com/ansible-collections/community.REPO_NAME/issues
+repository: https://github.com/zeusbaba/ansible-collection-wdt
+homepage: https://github.com/zeusbaba/ansible-collection-wdt
+issues: https://github.com/zeusbaba/ansible-collection-wdt/issues
+documentation: https://github.com/zeusbaba/ansible-collection-wdt/tree/main/docs
 
 # A list of file glob-like patterns used to filter any files or directories that should not be included in the build
 # artifact. A pattern is matched from the relative path of the file or directory of the collection directory. This
@@ -59,3 +65,7 @@ build_ignore:
   # https://docs.ansible.com/ansible/devel/dev_guide/developing_collections.html#ignoring-files-and-folders
   - .gitignore
   - changelogs/.plugin-cache.yaml
+  - .idea
+  - weblogic_deploy_tooling.iml
+  - wdt.iml
+  - myplaybooks

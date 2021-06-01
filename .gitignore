@@ -1,7 +1,22 @@
 .*
 !.gitignore
 
+!.ansible-lint
+!.gitattributes
+
+# ignore playbooks for local testing
+/myplaybooks*
+
 *.iml
+*.cache
+*.retry
+*.tfstate*
+*.tfvars
+*.zip
+
+*inventory*.json
+inventory/*.ini
+
 
 /tests/output/
 /changelogs/.plugin-cache.yaml
