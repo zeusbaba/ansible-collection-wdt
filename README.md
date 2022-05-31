@@ -40,7 +40,7 @@ Examples
   vars:
     # NB! change if you want to override which WDT version will be installed
     # See https://github.com/oracle/weblogic-deploy-tooling/releases
-    wdt_distribution_version: "1.9.13"
+    wdt_distribution_version: "1.9.20"
     wdt_user: zeus
     wdt_group: zeus
     
