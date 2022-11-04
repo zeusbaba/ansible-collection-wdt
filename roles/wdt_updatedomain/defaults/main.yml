@@ -10,5 +10,7 @@ mw_home: "{{ workdir }}/mw/Oracle_Home"
 wdt_home: "{{ workdir }}/weblogic-deploy"
 wdt_templates_home: "{{ workdir }}/wdt-templates"
 
+run_wdt_action: "update-domain-offline"
+
 # to create more complex domain type definitions, see https://oracle.github.io/weblogic-deploy-tooling/userguide/tools-config/domain_def/
 wdt_domain_type: "WLS"
